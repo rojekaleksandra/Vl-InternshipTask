@@ -2,6 +2,7 @@ package com.virtuslab.internship.receipt;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.ArrayList;
 
 public record Receipt(
         List<ReceiptEntry> entries,
@@ -10,7 +11,7 @@ public record Receipt(
 
     public Receipt(List<ReceiptEntry> entries) {
         this(entries,
-                null,
+                new ArrayList<>(),
                 entries.stream()
                         .map(ReceiptEntry::totalPrice)
                         .reduce(BigDecimal.ZERO, BigDecimal::add)
