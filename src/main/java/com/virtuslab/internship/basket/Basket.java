@@ -9,7 +9,7 @@ import java.util.List;
 
 @Component
 @RequestScope
-public final class Basket {
+public class Basket {
 
     private final List<Product> productsBasket;
 
