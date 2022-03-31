@@ -7,6 +7,7 @@ import com.virtuslab.internship.receipt.Receipt;
 import com.virtuslab.internship.receipt.ReceiptGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +31,9 @@ public class BasketController {
     }
 
     @GetMapping("/calculate")
-    public ResponseEntity<String> calculatePrice(@RequestParam List<String> productNames) {
+    public ResponseEntity<String> calculatePrice(@RequestParam  @Nullable List<String> productNames ) {
+        if(productNames==null) return ResponseEntity.ok("Basket is empty");
+
         final List<Product> products = productNames.stream()
                 .map(productDb::getProduct)
                 .collect(Collectors.toList());

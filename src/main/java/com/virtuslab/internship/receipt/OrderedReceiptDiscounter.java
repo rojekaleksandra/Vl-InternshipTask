@@ -19,7 +19,7 @@ public final class OrderedReceiptDiscounter implements IReceiptDiscounter {
     }
 
     @Override
-    public OrderedReceiptDiscounter addDiscountToBeginning(final IDiscount discount) {
+    public IReceiptDiscounter addDiscountToBeginning(final IDiscount discount) {
         var newDiscountsQueue = new LinkedHashSet<IDiscount>();
         newDiscountsQueue.add(discount);
         newDiscountsQueue.addAll(discounts);
@@ -27,7 +27,7 @@ public final class OrderedReceiptDiscounter implements IReceiptDiscounter {
     }
 
     @Override
-    public OrderedReceiptDiscounter addDiscount(final IDiscount discount) {
+    public IReceiptDiscounter addDiscount(final IDiscount discount) {
         var copiedDiscountsQueued = new LinkedHashSet<>(discounts);
         copiedDiscountsQueued.add(discount);
         return new OrderedReceiptDiscounter(copiedDiscountsQueued);

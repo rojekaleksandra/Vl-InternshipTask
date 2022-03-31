@@ -5,9 +5,9 @@ import com.virtuslab.internship.discount.IDiscount;
 import java.util.LinkedHashSet;
 
 public interface IReceiptDiscounter {
-    OrderedReceiptDiscounter addDiscountToBeginning(IDiscount discount);
+    IReceiptDiscounter addDiscountToBeginning(IDiscount discount);
 
-    OrderedReceiptDiscounter addDiscount(IDiscount discount);
+    IReceiptDiscounter addDiscount(IDiscount discount);
 
     Receipt generateReceiptWithDiscounts(final Receipt receipt);
 
