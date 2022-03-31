@@ -1,10 +1,14 @@
 package com.virtuslab.internship.basket;
 
 import com.virtuslab.internship.product.Product;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+@RequestScope
 public final class Basket {
 
     private final List<Product> productsBasket;
