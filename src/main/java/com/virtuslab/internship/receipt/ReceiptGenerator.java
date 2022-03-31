@@ -6,6 +6,7 @@ import com.virtuslab.internship.product.Product;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,7 @@ public final class ReceiptGenerator {
     private final IReceiptDiscounter receiptDiscounter;
 
     public ReceiptGenerator(final IReceiptDiscounter receiptDiscounter) {
-        this.receiptDiscounter = receiptDiscounter;
+        this.receiptDiscounter = Objects.requireNonNull(receiptDiscounter, "receipt discounter cannot be null");
     }
 
     public Receipt generate(final Basket basket) {

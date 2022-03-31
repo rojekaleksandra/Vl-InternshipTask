@@ -5,6 +5,7 @@ import com.virtuslab.internship.discount.type.TenPercentDiscount;
 import com.virtuslab.internship.product.ProductDb;
 import com.virtuslab.internship.receipt.Receipt;
 import com.virtuslab.internship.receipt.ReceiptEntry;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -14,7 +15,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CombinedDiscountsTest {
+
     @Test
+    @DisplayName("Should apply combined discounts")
     void shouldApplyCombinedDiscounts() {
         // Given
         var productDb = new ProductDb();

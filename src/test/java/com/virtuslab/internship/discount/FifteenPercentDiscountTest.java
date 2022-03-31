@@ -5,6 +5,7 @@ import com.virtuslab.internship.discount.type.FifteenPercentDiscount;
 import com.virtuslab.internship.product.ProductDb;
 import com.virtuslab.internship.receipt.Receipt;
 import com.virtuslab.internship.receipt.ReceiptEntry;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FifteenPercentDiscountTest {
     @Test
+    @DisplayName("Should apply 15 percent discount when 3 grain products are in the basket")
     void shouldApply15PercentDiscountWhen3GrainProductsInTheBasket() {
         // Given
         var productDb = new ProductDb();
@@ -37,6 +39,7 @@ public class FifteenPercentDiscountTest {
     }
 
     @Test
+    @DisplayName("Should not apply 15 percent discount when less than 3 grain products are in the basket")
     void shouldNotApply15PercentDiscountWhenLessThan3GrainProductsInTheBasket() {
         // Given
         var productDb = new ProductDb();
