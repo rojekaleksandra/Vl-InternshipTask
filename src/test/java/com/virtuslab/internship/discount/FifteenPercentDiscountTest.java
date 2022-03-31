@@ -1,5 +1,7 @@
 package com.virtuslab.internship.discount;
 
+
+import com.virtuslab.internship.discount.type.FifteenPercentDiscount;
 import com.virtuslab.internship.product.ProductDb;
 import com.virtuslab.internship.receipt.Receipt;
 import com.virtuslab.internship.receipt.ReceiptEntry;

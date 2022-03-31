@@ -1,6 +1,8 @@
 package com.virtuslab.internship.receipt;
 
 import com.virtuslab.internship.basket.Basket;
+import com.virtuslab.internship.discount.type.FifteenPercentDiscount;
+import com.virtuslab.internship.discount.type.TenPercentDiscount;
 import com.virtuslab.internship.product.ProductDb;
 import org.junit.jupiter.api.Test;
 
@@ -19,13 +21,14 @@ class ReceiptGeneratorTest {
         var bread = productDb.getProduct("Bread");
         var apple = productDb.getProduct("Apple");
         var expectedTotalPrice = milk.price().multiply(BigDecimal.valueOf(2)).add(bread.price()).add(apple.price());
+        var receiptDiscounter = OrderedReceiptDiscounter.withDiscounts(new FifteenPercentDiscount(), new TenPercentDiscount());
 
         cart.addProduct(milk);
         cart.addProduct(milk);
         cart.addProduct(bread);
         cart.addProduct(apple);
 
-        var receiptGenerator = new ReceiptGenerator();
+        var receiptGenerator = new ReceiptGenerator(receiptDiscounter);
 
         // When
         var receipt = receiptGenerator.generate(cart);

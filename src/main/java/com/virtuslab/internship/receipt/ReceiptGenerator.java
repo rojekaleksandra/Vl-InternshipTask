@@ -9,19 +9,25 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class ReceiptGenerator {
+public final class ReceiptGenerator {
+    private final IReceiptDiscounter receiptDiscounter;
 
-    public Receipt generate(Basket basket) {
-        List<ReceiptEntry> receiptEntries = new ArrayList<>();
+    public ReceiptGenerator(final IReceiptDiscounter receiptDiscounter) {
+        this.receiptDiscounter = receiptDiscounter;
+    }
 
-        Map<Product, Long> productsMap = basket.getProducts()
+    public Receipt generate(final Basket basket) {
+        final List<ReceiptEntry> receiptEntries = new ArrayList<>();
+
+        final Map<Product, Long> products = basket.getProductsBasket()
                 .stream()
-                .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        for(Product product: productsMap.keySet()){
-            receiptEntries.add( new ReceiptEntry(product, productsMap.get(product).intValue()) );
+        for (final Product product : products.keySet()) {
+            receiptEntries.add(new ReceiptEntry(product, products.get(product).intValue()));
         }
 
-        return new Receipt(receiptEntries);
+        return receiptDiscounter.generateReceiptWithDiscounts(new Receipt(receiptEntries));
     }
+
 }

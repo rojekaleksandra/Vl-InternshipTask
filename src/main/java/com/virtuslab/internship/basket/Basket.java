@@ -7,17 +7,23 @@ import java.util.List;
 
 public class Basket {
 
-    private final List<Product> products;
+    private final List<Product> productsBasket;
 
     public Basket() {
-        products = new ArrayList<>();
+        productsBasket = new ArrayList<>();
     }
 
     public void addProduct(Product product) {
-        products.add(product);
+        productsBasket.add(product);
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public void addProducts(final Product... products) {
+        addProducts(List.of(products));
+    }
+
+    public void addProducts(final List<Product> products) { productsBasket.addAll(products); }
+
+    public List<Product> getProductsBasket() {
+        return productsBasket;
     }
 }
