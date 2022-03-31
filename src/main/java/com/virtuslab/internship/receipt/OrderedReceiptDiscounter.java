@@ -19,15 +19,15 @@ public final class OrderedReceiptDiscounter implements IReceiptDiscounter {
     }
 
     @Override
-    public IReceiptDiscounter addToBeginning(final IDiscount discount) {
+    public OrderedReceiptDiscounter addDiscountToBeginning(final IDiscount discount) {
         var newDiscountsQueue = new LinkedHashSet<IDiscount>();
         newDiscountsQueue.add(discount);
         newDiscountsQueue.addAll(discounts);
-        return new OrderedReceiptDiscounter(new LinkedHashSet<>(newDiscountsQueue));
+        return new OrderedReceiptDiscounter(newDiscountsQueue);
     }
 
     @Override
-    public IReceiptDiscounter addToEnd(final IDiscount discount) {
+    public OrderedReceiptDiscounter addDiscount(final IDiscount discount) {
         var copiedDiscountsQueued = new LinkedHashSet<>(discounts);
         copiedDiscountsQueued.add(discount);
         return new OrderedReceiptDiscounter(copiedDiscountsQueued);
@@ -35,20 +35,20 @@ public final class OrderedReceiptDiscounter implements IReceiptDiscounter {
 
     @Override
     public Receipt generateReceiptWithDiscounts(final Receipt receipt) {
-        if (currentDiscountsQuantity() == 0) return receipt;
+        if (discounts.size() == 0) return receipt;
 
         final Iterator<IDiscount> iterator = discounts.iterator();
 
         Receipt discountedReceipt = iterator.next().apply(receipt);
 
         while (iterator.hasNext())
-            discountedReceipt = iterator.next().apply(receipt);
+            discountedReceipt = iterator.next().apply(discountedReceipt);
 
         return discountedReceipt;
     }
 
     @Override
-    public int currentDiscountsQuantity() {
-        return discounts.size();
+    public LinkedHashSet<IDiscount> getDiscounts() {
+        return new LinkedHashSet<>(discounts);
     }
 }

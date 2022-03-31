@@ -5,7 +5,7 @@ import com.virtuslab.internship.product.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Basket {
+public final class Basket {
 
     private final List<Product> productsBasket;
 
@@ -13,7 +13,7 @@ public class Basket {
         productsBasket = new ArrayList<>();
     }
 
-    public void addProduct(Product product) {
+    public void addProduct(final Product product) {
         productsBasket.add(product);
     }
 
@@ -24,6 +24,6 @@ public class Basket {
     public void addProducts(final List<Product> products) { productsBasket.addAll(products); }
 
     public List<Product> getProductsBasket() {
-        return productsBasket;
+        return new ArrayList<>(productsBasket);
     }
 }

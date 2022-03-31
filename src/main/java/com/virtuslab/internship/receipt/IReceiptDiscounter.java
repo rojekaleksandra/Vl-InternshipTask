@@ -2,12 +2,14 @@ package com.virtuslab.internship.receipt;
 
 import com.virtuslab.internship.discount.IDiscount;
 
-public interface IReceiptDiscounter {
-    IReceiptDiscounter addToBeginning(IDiscount discount);
+import java.util.LinkedHashSet;
 
-    IReceiptDiscounter addToEnd(IDiscount discount);
+public interface IReceiptDiscounter {
+    OrderedReceiptDiscounter addDiscountToBeginning(IDiscount discount);
+
+    OrderedReceiptDiscounter addDiscount(IDiscount discount);
 
     Receipt generateReceiptWithDiscounts(final Receipt receipt);
 
-    int currentDiscountsQuantity();
+    LinkedHashSet<IDiscount> getDiscounts();
 }
